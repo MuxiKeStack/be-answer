@@ -1,0 +1,13 @@
+grpc:
+  server:
+    name: "answer"
+    weight: 100
+    addr: ":19094"
+    etcdTTL: 60
+
+mysql:
+  dsn: "root:root@tcp(localhost:3306)/kstack"
+
+etcd:
+  endpoints:
+    - "localhost:12379"

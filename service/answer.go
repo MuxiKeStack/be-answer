@@ -6,6 +6,8 @@ import (
 	"github.com/MuxiKeStack/be-answer/repository"
 )
 
+var ErrAnswerNotFound = repository.ErrAnswerNotFound
+
 type AnswerService interface {
 	Publish(ctx context.Context, answer domain.Answer) (int64, error)
 	GetDetailById(ctx context.Context, answerId int64) (domain.Answer, error)

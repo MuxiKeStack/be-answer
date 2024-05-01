@@ -8,6 +8,8 @@ import (
 	"time"
 )
 
+var ErrAnswerNotFound = dao.ErrRecordNotFound
+
 type AnswerRepository interface {
 	Create(ctx context.Context, answer domain.Answer) (int64, error)
 	FindById(ctx context.Context, answerId int64) (domain.Answer, error)

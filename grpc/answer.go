@@ -29,6 +29,9 @@ func (a *AnswerServiceSever) Publish(ctx context.Context, request *answerv1.Publ
 
 func (a *AnswerServiceSever) Detail(ctx context.Context, request *answerv1.DetailRequest) (*answerv1.DetailResponse, error) {
 	answer, err := a.svc.GetDetailById(ctx, request.GetAnswerId())
+	if err == service.ErrAnswerNotFound {
+		return &answerv1.DetailResponse{}, answerv1.ErrorAnswerNotFound("回答不存在: %d", request.GetAnswerId())
+	}
 	return &answerv1.DetailResponse{
 		Answer: convertToV(answer),
 	}, err

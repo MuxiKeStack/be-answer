@@ -4,6 +4,9 @@ grpc:
     weight: 100
     addr: ":19094"
     etcdTTL: 60
+  client:
+    question:
+      endpoint: "discovery:///question"
 
 mysql:
   dsn: "root:root@tcp(localhost:3306)/kstack"
@@ -11,3 +14,7 @@ mysql:
 etcd:
   endpoints:
     - "localhost:12379"
+
+kafka:
+  addrs:
+    - "localhost:9094"

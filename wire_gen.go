@@ -22,9 +22,12 @@ func InitGRPCServer() grpcx.Server {
 	db := ioc.InitDB(logger)
 	answerDAO := dao.NewGORMAnswerDAO(db)
 	answerRepository := repository.NewAnswerRepository(answerDAO)
-	answerService := service.NewAnswerService(answerRepository)
+	client := ioc.InitKafka()
+	producer := ioc.InitProducer(client)
+	clientv3Client := ioc.InitEtcdClient()
+	questionServiceClient := ioc.InitQuestionClient(clientv3Client)
+	answerService := service.NewAnswerService(answerRepository, producer, questionServiceClient, logger)
 	answerServiceSever := grpc.NewAnswerServiceSever(answerService)
-	client := ioc.InitEtcdClient()
-	server := ioc.InitGRPCxKratosServer(answerServiceSever, client, logger)
+	server := ioc.InitGRPCxKratosServer(answerServiceSever, clientv3Client, logger)
 	return server
 }

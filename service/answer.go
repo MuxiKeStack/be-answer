@@ -58,7 +58,7 @@ func (a *answerService) Publish(ctx context.Context, answer domain.Answer) (int6
 				"answerer":   strconv.FormatInt(answer.PublisherId, 10),
 				"questioner": strconv.FormatInt(res.GetQuestion().GetQuestionerId(), 10),
 				"questionId": strconv.FormatInt(answer.QuestionId, 10),
-				"answerId":   strconv.FormatInt(answer.Id, 10),
+				"answerId":   strconv.FormatInt(answerId, 10),
 			},
 		})
 		if er != nil {
